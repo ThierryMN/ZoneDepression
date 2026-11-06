@@ -46,7 +46,7 @@ fetch('CUV300_FAB.geojson')
         div.innerHTML =
             '<div style="background:white;padding:10px;border:1px solid #ccc;border-radius:5px;">' +
             '<div style="display:flex;align-items:center;">' +
-            '<div style="width:20px;height:20px;background:##C19A6B;border:1px solid ##C19A6B;opacity:0.25;margin-right:8px;"></div>' +
+            '<div style="width:20px;height:20px;background:##C19A6B;border:1px solid #C19A6B;opacity:0.25;margin-right:8px;"></div>' +
             '<span>Zone de dépression</span>' +
             '</div>' +
             '</div>';
@@ -60,7 +60,8 @@ fetch('CUV300_FAB.geojson')
 });
 
 
-    const credits = L.control({
+
+const credits = L.control({
     position: 'bottomleft'
 });
 
@@ -69,17 +70,15 @@ credits.onAdd = function () {
     const div = L.DomUtil.create('div');
 
     div.innerHTML =
-        '<div style="' +
-        'background:white;' +
-        'padding:10px;' +
-        'border:1px solid #ccc;' +
-        'border-radius:5px;' +
-        'font-size:11px;' +
-        'line-height:1.4;' +
-        '">' +
+        '<div style="background:white;padding:10px;border:1px solid #ccc;border-radius:5px;font-size:11px;line-height:1.4;">' +
         '<b>Source :</b> Ville de Laval<br>' +
         '<b>Mise à jour :</b> Novembre 2026' +
         '</div>';
+
+    return div;
+};
+
+credits.addTo(map);
 
     return div;
 };
