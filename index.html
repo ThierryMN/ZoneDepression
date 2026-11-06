@@ -15,14 +15,9 @@ html, body, #map {
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 const map = L.map('map');
-
-
-    
 L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {
-        attribution: '&copy; Esri'
-    }
+    { attribution: '&copy; Esri' }
 ).addTo(map);
 L.tileLayer(
     'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}'
@@ -40,50 +35,37 @@ fetch('CUV300_FAB.geojson')
         }
     }).addTo(map);
     map.fitBounds(couche.getBounds());
+
     const legend = L.control({ position: 'bottomright' });
     legend.onAdd = function () {
         const div = L.DomUtil.create('div');
         div.innerHTML =
             '<div style="background:white;padding:10px;border:1px solid #ccc;border-radius:5px;">' +
             '<div style="display:flex;align-items:center;">' +
-            '<div style="width:20px;height:20px;background:##C19A6B;border:1px solid #C19A6B;opacity:0.25;margin-right:8px;"></div>' +
+            '<div style="width:20px;height:20px;background:#C19A6B;border:1px solid #C19A6B;opacity:0.6;margin-right:8px;"></div>' +
             '<span>Zone de dépression</span>' +
             '</div>' +
             '</div>';
         return div;
     };
     legend.addTo(map);
+
+    const credits = L.control({ position: 'bottomleft' });
+    credits.onAdd = function () {
+        const div = L.DomUtil.create('div');
+        div.innerHTML =
+            '<div style="background:white;padding:10px;border:1px solid #ccc;border-radius:5px;font-size:11px;line-height:1.4;">' +
+            '<b>Source :</b> Ville de Laval<br>' +
+            '<b>Mise à jour :</b> Novembre 2026' +
+            '</div>';
+        return div;
+    };
+    credits.addTo(map);
 })
 .catch(error => {
     console.error(error);
     alert('Erreur de lecture du GeoJSON');
 });
-
-
-
-const credits = L.control({
-    position: 'bottomleft'
-});
-
-credits.onAdd = function () {
-
-    const div = L.DomUtil.create('div');
-
-    div.innerHTML =
-        '<div style="background:white;padding:10px;border:1px solid #ccc;border-radius:5px;font-size:11px;line-height:1.4;">' +
-        '<b>Source :</b> Ville de Laval<br>' +
-        '<b>Mise à jour :</b> Novembre 2026' +
-        '</div>';
-
-    return div;
-};
-
-credits.addTo(map);
-
-    return div;
-};
 </script>
 </body>
 </html>
-
-
